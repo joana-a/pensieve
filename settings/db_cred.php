@@ -3,7 +3,7 @@
 define('SERVER', 'localhost');     
 define('USERNAME', 'root');        
 define('PASSWD', '');              
-define('DATABASE', 'booknest');     
+define('DATABASE', 'pensieve');     
 
 
 

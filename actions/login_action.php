@@ -14,16 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['username'];
-            $_SESSION['user_role'] = $user['role']; 
 
 
-            if ($_SESSION['user_role'] == 'customer') {
                 header("Location: ../view/home.php");
                 exit();
-            } else {
-                header("Location: ../view/admin_dashboard.php");
-                exit();
-            }
+           
         } else {
             header("Location: ../login/login.php?error=invalid_credentials");
             exit();

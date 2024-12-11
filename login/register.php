@@ -12,7 +12,7 @@
     </div>  
 
     <div class="register-container">
-        <form id="registerForm" action="../actions/registerprocess.php" method="POST">
+        <form id="registerForm" action="../actions/register_action.php" method="POST">
             <div class="form-group">
                 <input type="text" name="username" placeholder="Username" required>
             </div>
@@ -27,10 +27,11 @@
                     <option value="" disabled selected>Select Gender</option>
                     <option value="female">Female</option>
                     <option value="male">Male</option>
+                    <option value="other">Other</option>
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" name="contact_no" placeholder="Contact" required>
+                <input type="text" name="contact" placeholder="Contact" required>
             </div>
             <button type="submit" class="btn">Register</button>
         </form>

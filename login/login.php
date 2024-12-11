@@ -20,7 +20,7 @@
     ?>
 
     <div class="login-container">
-        <form id="loginForm" action="../actions/loginprocess.php" method="POST">
+        <form id="loginForm" action="../actions/login_action.php" method="POST">
             <div class="form-group">
                 <input type="text" name="username" placeholder="Username" required>
             </div>

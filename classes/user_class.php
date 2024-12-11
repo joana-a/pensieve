@@ -3,20 +3,20 @@ require("../settings/db_class.php");
 
 class user_class extends db_connection
 {
-	public function registerUser($username, $email, $password, $gender, $contact_no, $user_role)
+	public function registerUser($username, $email, $password, $gender, $contact)
     {
-        $ndb = new db_connection();
+        $ndb = new db_connection(); 
         
         $username = mysqli_real_escape_string($ndb->db_conn(), $username);
         $email = mysqli_real_escape_string($ndb->db_conn(), $email);
         $gender = mysqli_real_escape_string($ndb->db_conn(), $gender);
-        $contact_no = mysqli_real_escape_string($ndb->db_conn(), $contact_no);
+        $contact = mysqli_real_escape_string($ndb->db_conn(), $contact);
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $user_role = mysqli_real_escape_string($ndb->db_conn(), $user_role);
+       
 
         
-        $sql = "INSERT INTO `users`(`username`, `email`, `gender`, `pno`, `password`, `role`) 
-        VALUES ('$username', '$email', '$gender', '$contact_no', '$password', '$user_role')";
+        $sql = "INSERT INTO `users`(`username`, `email`, `password_hash`, `gender`, `contact`) 
+        VALUES ('$username', '$email', '$password', '$gender', '$contact')";
         return $this->db_query($sql);
 	}
  
@@ -38,7 +38,7 @@ class user_class extends db_connection
         if ($result != null){
 
             $user = $result;
-            if (password_verify($password, $user['password'])) {
+            if (password_verify($password, $user['password_hash'])) {
                 return $user;
             } else {
                 echo "password is wrong";

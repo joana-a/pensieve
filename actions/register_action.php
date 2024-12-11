@@ -10,11 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $gender = $_POST["gender"]; 
-    $contact_no = $_POST["contact_no"];
-    $user_role = 'customer';  
+    $contact = $_POST["contact"];
  
 
-    $registrationResult = registerUser_ctr($username, $email, $password, $gender, $contact_no, $user_role);
+    $registrationResult = registerUser_ctr($username, $email, $password, $gender, $contact);
 
 
     if ($registrationResult !== false) {
