@@ -3,20 +3,18 @@ require("../settings/db_class.php");
 
 class user_class extends db_connection
 {
-	public function registerUser($username, $email, $password, $gender, $contact)
+	public function registerUser($username, $email, $password)
     {
         $ndb = new db_connection(); 
         
         $username = mysqli_real_escape_string($ndb->db_conn(), $username);
         $email = mysqli_real_escape_string($ndb->db_conn(), $email);
-        $gender = mysqli_real_escape_string($ndb->db_conn(), $gender);
-        $contact = mysqli_real_escape_string($ndb->db_conn(), $contact);
         $password = password_hash($password, PASSWORD_DEFAULT);
        
 
         
-        $sql = "INSERT INTO `users`(`username`, `email`, `password_hash`, `gender`, `contact`) 
-        VALUES ('$username', '$email', '$password', '$gender', '$contact')";
+        $sql = "INSERT INTO `users`(`username`, `email`, `password`) 
+        VALUES ('$username', '$email', '$password')";
         return $this->db_query($sql);
 	}
  
@@ -38,7 +36,7 @@ class user_class extends db_connection
         if ($result != null){
 
             $user = $result;
-            if (password_verify($password, $user['password_hash'])) {
+            if (password_verify($password, $user['password'])) {
                 return $user;
             } else {
                 echo "password is wrong";

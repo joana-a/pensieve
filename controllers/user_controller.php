@@ -3,9 +3,9 @@ include_once("../classes/user_class.php");
 
 
 
-function registerUser_ctr($username, $email, $password, $gender, $contact){
+function registerUser_ctr($username, $email, $password){
 	$adduser=new user_class();
-	$result = $adduser->registerUser($username, $email, $password, $gender, $contact);
+	$result = $adduser->registerUser($username, $email, $password);
 	return $result;
 }
 

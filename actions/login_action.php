@@ -11,9 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = loginUser_ctr($username, $password);
 
         if ($user) {
-            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_name'] = $user['username'];
+            $_SESSION['username'] = $user['username'];
 
 
                 header("Location: ../view/home.php");

@@ -22,7 +22,7 @@
             <div class="form-group">
                 <input type="password" name="password" placeholder="Password" required>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <select name="gender" required>
                     <option value="" disabled selected>Select Gender</option>
                     <option value="female">Female</option>
@@ -31,8 +31,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" name="contact" placeholder="Contact" required>
-            </div>
+                <input type="text" name="contact" placeholder="Contact" required> -->
+            <!-- </div> -->
             <button type="submit" class="btn">Register</button>
         </form>
     </div>
