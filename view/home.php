@@ -16,7 +16,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 </head>
 <body>        
     <div class="container">
-        <h1>Welcome to the ADHD Reading Platform</h1>
+        <h1>Welcome to PENSIEVE!</h1>
         <div class="upload-section">
             <h2>Upload a Book</h2>
             <form action="../actions/upload_book_action.php" method="POST" enctype="multipart/form-data">
@@ -52,6 +52,20 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
     console.log("Opening file:", filePath); // Debugging
     document.getElementById('book-reader').src = filePath;
     document.getElementById('reader-container').style.display = "flex"; 
+
+    // fetch('../actions/update_progress.php', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({})
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     if (data.success) {
+    //         console.log("XP and Streak updated!");
+    //     } else {
+    //         console.error("Error updating progress:", data.error);
+    //     }
+    // });
 }
 
 function closeReader() {
