@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $password = $_POST["password"];
+    $password = $_POST["password"]; 
  
 
     $registrationResult = registerUser_ctr($username, $email, $password);

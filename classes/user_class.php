@@ -17,7 +17,7 @@ class user_class extends db_connection
         VALUES ('$username', '$email', '$password')";
         return $this->db_query($sql);
 	}
- 
+  
 	
     public function loginUser($username, $password)
     {

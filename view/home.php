@@ -1,10 +1,17 @@
 <?php
 session_start();
-require("../controllers/book_controller.php");
+require_once("../controllers/book_controller.php");
+require_once("../controllers/streak_controller.php");
 
 $books = getAllBooksController();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
+$username = $_SESSION['username'] ?? 'Guest';
+$user_id = $_SESSION['user_id'] ?? null;
+
+if ($user_id) {
+    updateStreakController($user_id); 
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +21,10 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
     <title>ADHD Reading Platform</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>        
+<body>  
+<?php include "topbar.php"; ?>
+
+
     <div class="container">
         <h1>Welcome to PENSIEVE!</h1>
         <div class="upload-section">
@@ -33,7 +43,6 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
                 if ($books) {
                     foreach ($books as $b) {
                         echo "<li><a href='#' onclick=\"openReader('../uploads/{$b['file_path']}')\">{$b['title']} by {$b['author']}</a></li>";
-
                     }
                 } else {
                     echo "<li>No books available.</li>";
@@ -49,29 +58,14 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
     
     <script>
         function openReader(filePath) {
-    console.log("Opening file:", filePath); // Debugging
-    document.getElementById('book-reader').src = filePath;
-    document.getElementById('reader-container').style.display = "flex"; 
+            console.log("Opening file:", filePath);
+            document.getElementById('book-reader').src = filePath;
+            document.getElementById('reader-container').style.display = "flex"; 
+        }
 
-    // fetch('../actions/update_progress.php', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({})
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     if (data.success) {
-    //         console.log("XP and Streak updated!");
-    //     } else {
-    //         console.error("Error updating progress:", data.error);
-    //     }
-    // });
-}
-
-function closeReader() {
-    document.getElementById('reader-container').style.display = "none"; 
-}
-
+        function closeReader() {
+            document.getElementById('reader-container').style.display = "none"; 
+        }
     </script>
 </body>
 </html>
@@ -82,11 +76,29 @@ function closeReader() {
         margin: 0;
         padding: 0;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         height: 100vh;
         background-color: #ffe6f2;
         color: #333;
+    }
+    .top-bar {
+        width: 100%;
+        background: #d63384;
+        color: white;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-weight: bold;
+    }
+    .top-bar a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .top-bar a:hover {
+        text-decoration: underline;
     }
     .container {
         background: white;
@@ -95,6 +107,7 @@ function closeReader() {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         width: 500px;
         text-align: center;
+        margin-top: 20px;
     }
     h1 {
         color: #d63384;
@@ -153,27 +166,25 @@ function closeReader() {
     }
     
     #reader-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 0px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 0;
-    z-index: 1000;
-    display: none;
-}
-
-iframe {
-    width: 100%;
-    height: 100vh;
-    border: none;
-}
-
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 0px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 0;
+        z-index: 1000;
+        display: none;
+    }
+    iframe {
+        width: 100%;
+        height: 100vh;
+        border: none;
+    }
 </style>
