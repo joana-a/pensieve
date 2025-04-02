@@ -3,15 +3,14 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once("../controllers/streak_controller.php");
-// require_once("../controllers/xp_controller.php");
-// require_once("../controllers/badge_controller.php");
+require_once("../controllers/badge_controller.php");
 
 $user_id = $_SESSION['user_id'] ?? null;
 $username = $_SESSION['username'] ?? 'Guest';
 $streak = $user_id ? getUserStreakController($user_id) : null;
 $streakCount = $streak ? $streak['streak_count'] : 0;
 $xpPoints = $streak ? $streak['xp_points'] : 0;
-// $badges = $user_id ? getUserBadgesController($user_id) : [];
+$badges = $user_id ? getUserBadgesController($user_id) : [];
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +39,8 @@ $xpPoints = $streak ? $streak['xp_points'] : 0;
             <?php if (!empty($badges)): ?>
                 <?php foreach ($badges as $badge): ?>
                     <div class="badge">
-                        <img src="../images/badges/<?= htmlspecialchars($badge['icon']) ?>" alt="<?= htmlspecialchars($badge['name']) ?>">
-                        <p><?= htmlspecialchars($badge['name']) ?></p>
+                        <img src="../images/badges/<?= htmlspecialchars($badge['icon']) ?>" alt="<?= htmlspecialchars($badge['badge_name']) ?>">
+                        <p><?= htmlspecialchars($badge['badge_name']) ?></p>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>

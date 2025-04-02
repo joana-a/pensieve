@@ -2,16 +2,18 @@
 session_start();
 require_once("../controllers/book_controller.php");
 require_once("../controllers/streak_controller.php");
+require_once("../controllers/badge_controller.php");
 
 $books = getAllBooksController();
 $username = $_SESSION['username'] ?? 'Guest';
 $user_id = $_SESSION['user_id'] ?? null;
 
+// Check streak, XP, and award badges if logged in
 if ($user_id) {
-    updateStreakController($user_id); 
+    updateStreakController($user_id); // Update user streak
+    checkAndAwardBadges($user_id); // Check and award badges
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +23,12 @@ if ($user_id) {
     <title>ADHD Reading Platform</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>  
+<body>
 <?php include "topbar.php"; ?>
 
-
     <div class="container">
-        <h1>Welcome to PENSIEVE!</h1>
+        <h1>Welcome to PENSIEVE, <?php echo $username; ?>!</h1>
+        
         <div class="upload-section">
             <h2>Upload a Book</h2>
             <form action="../actions/upload_book_action.php" method="POST" enctype="multipart/form-data">
@@ -36,6 +38,7 @@ if ($user_id) {
                 <button type="submit">Upload</button>
             </form>
         </div>
+
         <div class="books-section">
             <h2>Available Books</h2>
             <ul>
@@ -50,12 +53,15 @@ if ($user_id) {
                 ?>
             </ul>
         </div>
+
+        
+
         <div id="reader-container" class="reader-hidden">
             <iframe id="book-reader" src="" frameborder="0"></iframe>
             <button onclick="closeReader()">Close</button>
         </div>
     </div>
-    
+
     <script>
         function openReader(filePath) {
             console.log("Opening file:", filePath);
