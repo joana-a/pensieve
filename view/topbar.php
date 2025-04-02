@@ -18,7 +18,7 @@ $xpPoints = $streak ? $streak['xp_points'] : 0;
     <span>⭐ XP: <?= $xpPoints ?> points</span>
     <a href="profile.php">👤 Profile</a>
     <a href="leaderboard.php">🏆 Leaderboard</a>
-    <a href="rewards.php">🎁 Rewards</a>
+    <!-- <a href="rewards.php">🎁 Rewards</a> -->
     <a href="../login/logout.php" class="logout-btn">🚪 Logout</a>
 </div>
 

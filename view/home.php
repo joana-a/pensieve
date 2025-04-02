@@ -27,7 +27,7 @@ if ($user_id) {
 <?php include "topbar.php"; ?>
 
     <div class="container">
-        <h1>Welcome to PENSIEVE, <?php echo $username; ?>!</h1>
+        <h1>Welcome to PENSIEVE <3 </h1>
         
         <div class="upload-section">
             <h2>Upload a Book</h2>
